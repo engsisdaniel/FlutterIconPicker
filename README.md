@@ -22,6 +22,12 @@ This package provides an IconPicker with supported (or custom provided) Icons wh
 
 To use this package, add `flutter_iconpicker` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
+### Building
+
+If you build your app it may fail because of this package. #TreeShakeIcons
+
+To be able to build your app, add to your build command the flag: `--no-tree-shake-icons` and you should be good to go!
+
 ## API-Reference
 
 | __Parameter__           | __Type__           | __Default__ | __Short description__                |
@@ -44,12 +50,12 @@ To use this package, add `flutter_iconpicker` as a [dependency in your pubspec.y
 | noResultsText     | `String`         | `'No results for:'`      | The text to show when no results where found for the search term. |
 | showTooltips   | `bool`           | `false`      | Shows the labels underneeth the proper icon. |
 | showSearchBar   | `bool`           | `true`      | Shows the search bar above the icons if `true` |
-| iconPackMode   | `IconPack`           | `IconPack.material`      | The mode which Icons to show. |
+| iconPackModes   | `List<IconPack>`           | `const <IconPack>[IconPack.material]`      | The modes which Icons to show. |
 | customIconPack   | `Map<String, IconData>`           | `null`      | The customized icons that can be used instead. |
 
 ### IconPackMode
 
-You can select the wished IconPack through the argument: `iconPackMode`. This defaults to `IconPack.material`.
+You can select the wished IconPacks through the argument: `iconPackModes`. This defaults to `const <IconPack>[IconPack.material]`.
 For further usage have a look in the example.
 
 ### You own Icons
@@ -93,50 +99,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: HomeScreen()
-  ));
+  runApp(
+    const MaterialApp(
+      home: HomeScreen(),
+    ),
+  );
 }
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Icon _icon;
+  Icon? _icon;
 
-_pickIcon() async {
-  IconData icon = await FlutterIconPicker.showIconPicker(context, iconPackMode: IconPack.cupertino);
+  _pickIcon() async {
+    IconData? icon = await FlutterIconPicker.showIconPicker(context,
+        iconPackModes: [IconPack.cupertino]);
 
-  _icon = Icon(icon);
-  setState((){});
+    _icon = Icon(icon);
+    setState(() {});
 
-  debugPrint('Picked Icon:  $icon');
-}
+    debugPrint('Picked Icon:  $icon');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          RaisedButton(
-            onPressed: _pickIcon,
-            child: Text('Open IconPicker'),
-          ),
-          SizedBox(height: 10),
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
-            child: _icon != null ? _icon : Container()
-          )
-        ])
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: _pickIcon,
+              child: const Text('Open IconPicker'),
+            ),
+            const SizedBox(height: 10),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: _icon ?? Container(),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
 ```

@@ -1,3 +1,42 @@
+## [3.1.4+1] - 26.04.2022
+
+* Update Docs
+
+## [3.1.4] - 26.04.2022
+
+* Update Dependencies
+* Update `font_awesome_flutter` icons
+* Fix Format
+
+## [3.1.3] - 16.04.2022
+
+* Fixed `pie_chart_outlined` not exists.
+  - Thanks to: [#43](https://github.com/Ahmadre/FlutterIconPicker/pull/43)
+
+## [3.1.2] - 04.01.2022
+
+* Fixed default return Material Icons wiht new `iconPackModes` interface. Thanks to [jlnrrg](https://github.com/jlnrrg) for his hint in [#34](https://github.com/Ahmadre/FlutterIconPicker/issues/34#issuecomment-1003804252)
+
+## [3.1.1] - 29.12.2021
+
+* Remove `iconPackMode`. Use now: `iconPackModes`, where you can add a `List<IconPack>` to provide users multiple packs (including your own `customIconPack`).
+
+## [3.1.0] - 26.12.2021
+
+* [BREAKING-CHANGE]:
+  - `iconPackMode` is now `iconPackModes`, where you can add a `List<IconPack>` to provide users multiple packs (including your own `customIconPack`). You can also use only a single pack, just do: `[IconPack.blabla]`
+    - Thanks for Feature Request: [#34](https://github.com/Ahmadre/FlutterIconPicker/issues/34)
+  - Mark `iconPackMode` as deprecated
+## [3.0.5] - 26.12.2021
+
+* Fix outdated Material Icons.
+  - Fixes: [#29](https://github.com/Ahmadre/FlutterIconPicker/issues/29)
+    - Thanks to: [#32](https://github.com/Ahmadre/FlutterIconPicker/pull/32)
+* Fix outdated Font Awesome Icons.
+  - Fixes: [#30](https://github.com/Ahmadre/FlutterIconPicker/issues/30)
+    - Thanks to: [#31](https://github.com/Ahmadre/FlutterIconPicker/pull/31)
+* Update dependencies
+
 ## [3.0.4] - 02.09.20213
 
 * Fix outdated Material Icons.
